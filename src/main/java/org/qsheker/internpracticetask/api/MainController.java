@@ -6,6 +6,7 @@ import org.qsheker.internpracticetask.models.Weather;
 import org.qsheker.internpracticetask.service.HealthCheckService;
 import org.qsheker.internpracticetask.service.WeatherService;
 import org.qsheker.internpracticetask.web.dto.HealthDto;
+import org.qsheker.internpracticetask.web.dto.WeatherRequestDto;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -29,7 +30,11 @@ public class MainController {
     }
 
     @PostMapping("/add")
-    public Weather add(@RequestBody Weather weather){
+    public Weather add(@RequestBody WeatherRequestDto dto){
+        var weather = Weather.builder()
+                .city(dto.getCity())
+                .temperature(dto.getTemperature())
+                .build();
         return weatherService.save(weather);
     }
 
