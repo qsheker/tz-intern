@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface WeatherService {
     List<Weather> findAll();
+    Weather save(Weather weather);
 }
