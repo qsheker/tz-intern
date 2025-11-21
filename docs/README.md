@@ -148,8 +148,6 @@ POST   | `/api/add`     | Add a weather entry
 
 Docker images are built automatically on each push to the `main` branch.
 
-![CI badge](https://github.com/your-username/weather-service/actions/workflows/docker-build.yml/badge.svg)
-
 ## What this README covers
 - ✅ **How to build and run** — Docker Compose commands
 - ✅ **How to verify the service** — curl examples for key endpoints
