@@ -5,14 +5,13 @@ import org.qsheker.internpracticetask.models.Health;
 import org.qsheker.internpracticetask.models.Weather;
 import org.qsheker.internpracticetask.service.HealthCheckService;
 import org.qsheker.internpracticetask.service.WeatherService;
+import org.qsheker.internpracticetask.web.dto.HealthDto;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@RequestMapping("/api")
 public class MainController {
 
     private final HealthCheckService healthCheckService;
@@ -30,8 +29,11 @@ public class MainController {
     }
 
     @GetMapping("/health")
-    public Health health(){
-        return healthCheckService.checkHealth();
+    public HealthDto health(){
+        var healthDto = new HealthDto();
+        Health health = healthCheckService.checkHealth();
+        healthDto.setStatus(health.getHealth().name());
+        return healthDto;
     }
 
     @GetMapping("/list")
@@ -43,7 +45,7 @@ public class MainController {
 
         return "weather";
     }
-    @PostMapping
+    @PostMapping("/add")
     public Weather add(@RequestBody Weather weather){
         return weatherService.save(weather);
     }

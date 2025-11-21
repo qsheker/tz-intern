@@ -26,17 +26,16 @@ public class HealthCheckServiceImpl implements HealthCheckService {
             Connection con = dataSource.getConnection();
             Statement statement = con.createStatement();
 
-            statement.execute(DB_STATEMENT);
+            var result = statement.execute(DB_STATEMENT);
 
-            return Health.builder()
+            return result ? Health.builder()
                     .health(HealthStatus.HEALTHY)
+                    .build() : Health.builder()
+                    .health(HealthStatus.UNHEALTHY)
                     .build();
 
         } catch (SQLException e) {
-
-            return Health.builder()
-                    .health(HealthStatus.UNHEALTHY)
-                    .build();
+            throw new RuntimeException(e);
         }
     }
 }
