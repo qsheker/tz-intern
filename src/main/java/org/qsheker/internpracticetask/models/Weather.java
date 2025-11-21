@@ -21,6 +21,11 @@ public class Weather {
     @Column(name = "city_name")
     private String city;
 
-    private Long temperature;
+    private Integer temperature;
+
+    public Weather(String city, Integer temperature){
+        this.city = city;
+        this.temperature = temperature;
+    }
 }
 
